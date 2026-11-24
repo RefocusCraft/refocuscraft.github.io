@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RefocusCraft unifies video refocusing, defocus deblurring, and bokeh synthesis through CoC-guided state transitions. Explore the video, method, and interactive results.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RefocusCraft: Unified Video Refocusing via CoC-Guided State Transitions">
+  <meta property="og:description" content="Unified, one-step video refocusing without an all-in-focus intermediate.">
+  <meta property="og:image" content="https://refocuscraft.github.io/figures/video-poster.jpg">
+  <meta property="og:url" content="https://refocuscraft.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://refocuscraft.github.io/">
+  <title>RefocusCraft: Unified Video Refocusing via CoC-Guided State Transitions</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/project-page.css">
+  <script src="assets/main.js" defer></script>
+  <script src="assets/real-comparisons.js" defer></script>
+  <script src="assets/evidence-data.js" defer></script>
+  <script src="assets/evidence.js" defer></script>
+  <script src="assets/project-page.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="paper-header">
+      <h1><span class="paper-name">RefocusCraft:</span> Unified Video Refocusing<br class="desktop-break"> via CoC-Guided State Transitions</h1>
+      <p class="paper-authors" aria-label="Authors">
+        <span class="author">Jialiang Feng<sup>1</sup></span>
+        <span class="author">Shengxin Liu<sup>1</sup></span>
+        <span class="author">Yong Du<sup>2</sup></span>
+        <span class="author">Shengfeng He<sup>3</sup></span>
+        <span class="author">Yangyang Xu<sup>1</sup></span>
+        <span class="author">Jun Yu<sup>1</sup></span>
+      </p>
+      <div class="paper-affiliations" aria-label="Affiliations">
+        <span class="affiliation"><sup>1</sup>Harbin Institute of Technology</span>
+        <span class="affiliation"><sup>2</sup>Ocean University of China</span>
+        <span class="affiliation"><sup>3</sup>Singapore Management University</span>
+      </div>
+      <p class="publication-line"><span class="submission-badge">CVPR 2027 Submission</span></p>
+      <nav class="paper-links" aria-label="Project navigation">
+        <a class="paper-link" href="#project-video">Video</a>
+        <a class="paper-link" href="#visual-results">Interactive results</a>
+        <a class="paper-link" href="#method-title">Method</a>
+        <a class="paper-link" href="https://github.com/PearlInTheCoralSea/RefocusCraft">GitHub</a>
+      </nav>
+    </header>
+    <section class="project-video-section" id="project-video" aria-label="RefocusCraft project video">
+      <figure class="project-video-frame">
+        <video class="project-video" src="RefocusCraft.mp4" poster="figures/video-poster.jpg" width="1920" height="1080" controls playsinline preload="metadata" aria-label="RefocusCraft research presentation video">
+          Your browser does not support embedded video. <a href="RefocusCraft.mp4">Download the RefocusCraft video.</a>
+        </video>
+        <figcaption class="project-video-caption">One framework for video refocusing, defocus deblurring, and bokeh synthesis.</figcaption>
+      </figure>
+    </section>
+    <section class="teaser-section" id="visual-results" aria-label="Video refocusing comparisons">
+      <div class="section-heading"><h2>Direct Video Refocusing</h2><p>Change the focus directly, without first reconstructing an all-in-focus video.</p></div>
+      <div class="teaser-grid">
+        <figure class="comparison" data-example="1">
+          <div class="comparison-stage" style="--split:50%">
+            <video class="comparison-video" data-src="media/teaser-1/comparison.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+            <canvas width="512" height="512" role="img" aria-label="Teaser example 1: Source on the left and RefocusCraft on the right"></canvas>
+            <span class="side-label source-label">Source</span>
+            <span class="side-label result-label">RefocusCraft</span>
+            <span class="divider" aria-hidden="true"><span class="divider-grip"></span></span>
+            <input class="wipe-slider" type="range" min="0" max="100" value="50" step="0.1" aria-label="Move comparison divider for example 1" aria-valuetext="50 percent Source, 50 percent RefocusCraft">
+            <p class="media-error" hidden>Video unavailable. <a href="media/teaser-1/source.mp4">Source</a> · <a href="media/teaser-1/refocuscraft.mp4">RefocusCraft</a></p>
+          </div>
+          <figcaption class="clip-controls">
+            <button class="clip-toggle" type="button" aria-label="Play example 1">Play</button>
+            <input class="frame-slider" type="range" min="0" max="24" step="1" value="0" aria-label="Video frame for example 1">
+            <output class="frame-count" aria-label="Current frame">01 / 25</output>
+            <button class="enlarge" type="button" aria-label="Enlarge example 1">Enlarge</button>
+          </figcaption>
+        </figure>
+        <figure class="comparison" data-example="2">
+          <div class="comparison-stage" style="--split:50%">
+            <video class="comparison-video" data-src="media/teaser-2/comparison.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+            <canvas width="512" height="512" role="img" aria-label="Teaser example 2: Source on the left and RefocusCraft on the right"></canvas>
+            <span class="side-label source-label">Source</span>
+            <span class="side-label result-label">RefocusCraft</span>
+            <span class="divider" aria-hidden="true"><span class="divider-grip"></span></span>
+            <input class="wipe-slider" type="range" min="0" max="100" value="50" step="0.1" aria-label="Move comparison divider for example 2" aria-valuetext="50 percent Source, 50 percent RefocusCraft">
+            <p class="media-error" hidden>Video unavailable. <a href="media/teaser-2/source.mp4">Source</a> · <a href="media/teaser-2/refocuscraft.mp4">RefocusCraft</a></p>
+          </div>
+          <figcaption class="clip-controls">
+            <button class="clip-toggle" type="button" aria-label="Play example 2">Play</button>
+            <input class="frame-slider" type="range" min="0" max="24" step="1" value="0" aria-label="Video frame for example 2">
+            <output class="frame-count" aria-label="Current frame">01 / 25</output>
+            <button class="enlarge" type="button" aria-label="Enlarge example 2">Enlarge</button>
+          </figcaption>
+        </figure>
+        <figure class="comparison" data-example="3">
+          <div class="comparison-stage" style="--split:50%">
+            <video class="comparison-video" data-src="media/teaser-3/comparison.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+            <canvas width="512" height="512" role="img" aria-label="Teaser example 3: Source on the left and RefocusCraft on the right"></canvas>
+            <span class="side-label source-label">Source</span>
+            <span class="side-label result-label">RefocusCraft</span>
+            <span class="divider" aria-hidden="true"><span class="divider-grip"></span></span>
+            <input class="wipe-slider" type="range" min="0" max="100" value="50" step="0.1" aria-label="Move comparison divider for example 3" aria-valuetext="50 percent Source, 50 percent RefocusCraft">
+            <p class="media-error" hidden>Video unavailable. <a href="media/teaser-3/source.mp4">Source</a> · <a href="media/teaser-3/refocuscraft.mp4">RefocusCraft</a></p>
+          </div>
+          <figcaption class="clip-controls">
+            <button class="clip-toggle" type="button" aria-label="Play example 3">Play</button>
+            <input class="frame-slider" type="range" min="0" max="24" step="1" value="0" aria-label="Video frame for example 3">
+            <output class="frame-count" aria-label="Current frame">01 / 25</output>
+            <button class="enlarge" type="button" aria-label="Enlarge example 3">Enlarge</button>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="gallery-toolbar">
+        <p class="interaction-hint">Drag the vertical divider to compare Source and RefocusCraft.</p>
+        <div class="gallery-actions">
+          <button id="toggle-all" type="button">Play all</button>
+          <label class="speed-control" for="playback-speed">Playback
+            <select id="playback-speed"><option value="1">Original speed (1×)</option><option value="0.3336666667">Slow (8 fps)</option></select>
+          </label>
+        </div>
+      </div>
+      <noscript><p class="noscript-message">Enable JavaScript to drag the comparison divider. The original videos are available in the media folder.</p></noscript>
+    </section>
+    <section class="abstract-section" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p>Post-capture video refocusing enables flexible control over focus and depth of field. However, image-based methods struggle to maintain temporal consistency when applied frame by frame, while two-stage video pipelines can introduce redundant restoration and propagate errors through an all-in-focus intermediate. We propose RefocusCraft, a unified one-step framework for efficient and temporally coherent video refocusing. Our key idea is to model refocusing as local transitions between source and target defocus states, jointly supporting detail recovery, blur synthesis, and appearance preservation within the same video. Guided by signed source and target circle-of-confusion (CoC) maps, our framework adapts a pretrained video diffusion model to directly generate the refocused video without explicit all-in-focus reconstruction. To align feature interactions with these transitions, we introduce two complementary attention mechanisms. Transition-compatible self-attention aggregates generation features with similar source and target defocus states, while defocus-compatible cross-attention selectively reuses source features to support the desired defocus transitions. Source-conditioned decoding further incorporates fine-grained input features to preserve textures and object boundaries. Experiments on our synthetic and real-world datasets demonstrate strong visual fidelity and temporal coherence across bokeh rendering, defocus deblurring, and refocusing.</p>
+    </section>
+    <section class="method-section" aria-labelledby="method-title">
+      <h2 id="method-title">Method</h2>
+      <figure class="method-figure">
+        <button class="method-zoom" type="button" aria-label="Enlarge the method overview">
+          <img src="figures/method_overview.webp" width="3200" height="1543" alt="RefocusCraft method overview, including CoC-guided state transitions, transition-compatible self-attention, defocus-compatible cross-attention, and source-conditioned decoding.">
+        </button>
+        <figcaption>Overview of RefocusCraft. Click the figure to enlarge.</figcaption>
+      </figure>
+    </section>
+    <nav class="section-nav" aria-label="Supplementary sections">
+      <a href="#real-results-title">Comparisons</a><a href="#detail-evidence-title">Details</a><a href="#temporal-evidence-title">Temporal consistency</a><a href="#focus-control-title">Focus control</a><a href="#focus-motion-title">Focus transitions</a><a href="#efficiency-title">Efficiency</a>
+    </nav>
+    <section class="real-results-section" aria-labelledby="real-results-title">
+      <h2 id="real-results-title">Real-world Video Refocusing</h2>
+      <p class="results-description">Yellow crosses mark target focus points. Videos in each row play in sync. Click any video to enlarge.</p>
+      <div class="result-rows">
+        <article class="result-row" data-case="1" data-fps="23.976023976024" aria-label="Real-world comparison case 1">
+          <video class="result-video" data-src="media/fig6-case-1/all-methods.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="result-grid">
+            <figure class="result-cell" data-column="0">
+              <figcaption>Source</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge Source, comparison case 1"><canvas width="512" height="512" role="img" aria-label="Source, real-world comparison case 1"></canvas><span class="target-focus" style="left:42.38281%;top:21.09375%" aria-hidden="true"></span></button>
+            </figure>
+            <figure class="result-cell" data-column="1">
+              <figcaption>AnyBokeh</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge AnyBokeh, comparison case 1"><canvas width="512" height="512" role="img" aria-label="AnyBokeh, real-world comparison case 1"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="2">
+              <figcaption>GenFocus</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge GenFocus, comparison case 1"><canvas width="512" height="512" role="img" aria-label="GenFocus, real-world comparison case 1"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="3">
+              <figcaption>DiffCamera</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge DiffCamera, comparison case 1"><canvas width="512" height="512" role="img" aria-label="DiffCamera, real-world comparison case 1"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="4">
+              <figcaption>RAV</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RAV, comparison case 1"><canvas width="512" height="512" role="img" aria-label="RAV, real-world comparison case 1"></canvas></button>
+            </figure>
+            <figure class="result-cell result-ours" data-column="5">
+              <figcaption>RefocusCraft</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RefocusCraft, comparison case 1"><canvas width="512" height="512" role="img" aria-label="RefocusCraft, real-world comparison case 1"></canvas></button>
+            </figure>
+          </div>
+          <div class="result-controls">
+            <button class="result-toggle" type="button" aria-label="Play comparison case 1">Play</button>
+            <input class="result-seek" type="range" min="0" max="24" value="0" step="1" aria-label="Video frame for comparison case 1">
+            <output class="result-frame" aria-label="Current frame">01 / 25</output>
+            <label class="result-speed-label">Playback <select class="result-speed" aria-label="Playback speed for comparison case 1"><option value="1">Original speed (1×)</option><option value="slow">Slow (8 fps)</option></select></label>
+          </div>
+          <p class="result-error" hidden>The comparison video could not be loaded.</p>
+        </article>
+        <article class="result-row" data-case="2" data-fps="25.000000000000" aria-label="Real-world comparison case 2">
+          <video class="result-video" data-src="media/fig6-case-2/all-methods.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="result-grid">
+            <figure class="result-cell" data-column="0">
+              <figcaption>Source</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge Source, comparison case 2"><canvas width="512" height="512" role="img" aria-label="Source, real-world comparison case 2"></canvas><span class="target-focus" style="left:81.25000%;top:41.01562%" aria-hidden="true"></span></button>
+            </figure>
+            <figure class="result-cell" data-column="1">
+              <figcaption>AnyBokeh</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge AnyBokeh, comparison case 2"><canvas width="512" height="512" role="img" aria-label="AnyBokeh, real-world comparison case 2"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="2">
+              <figcaption>GenFocus</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge GenFocus, comparison case 2"><canvas width="512" height="512" role="img" aria-label="GenFocus, real-world comparison case 2"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="3">
+              <figcaption>DiffCamera</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge DiffCamera, comparison case 2"><canvas width="512" height="512" role="img" aria-label="DiffCamera, real-world comparison case 2"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="4">
+              <figcaption>RAV</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RAV, comparison case 2"><canvas width="512" height="512" role="img" aria-label="RAV, real-world comparison case 2"></canvas></button>
+            </figure>
+            <figure class="result-cell result-ours" data-column="5">
+              <figcaption>RefocusCraft</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RefocusCraft, comparison case 2"><canvas width="512" height="512" role="img" aria-label="RefocusCraft, real-world comparison case 2"></canvas></button>
+            </figure>
+          </div>
+          <div class="result-controls">
+            <button class="result-toggle" type="button" aria-label="Play comparison case 2">Play</button>
+            <input class="result-seek" type="range" min="0" max="24" value="0" step="1" aria-label="Video frame for comparison case 2">
+            <output class="result-frame" aria-label="Current frame">01 / 25</output>
+            <label class="result-speed-label">Playback <select class="result-speed" aria-label="Playback speed for comparison case 2"><option value="1">Original speed (1×)</option><option value="slow">Slow (8 fps)</option></select></label>
+          </div>
+          <p class="result-error" hidden>The comparison video could not be loaded.</p>
+        </article>
+        <article class="result-row" data-case="3" data-fps="30.000000000000" aria-label="Real-world comparison case 3">
+          <video class="result-video" data-src="media/fig6-case-3/all-methods.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="result-grid">
+            <figure class="result-cell" data-column="0">
+              <figcaption>Source</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge Source, comparison case 3"><canvas width="512" height="512" role="img" aria-label="Source, real-world comparison case 3"></canvas><span class="target-focus" style="left:54.10156%;top:16.40625%" aria-hidden="true"></span></button>
+            </figure>
+            <figure class="result-cell" data-column="1">
+              <figcaption>AnyBokeh</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge AnyBokeh, comparison case 3"><canvas width="512" height="512" role="img" aria-label="AnyBokeh, real-world comparison case 3"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="2">
+              <figcaption>GenFocus</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge GenFocus, comparison case 3"><canvas width="512" height="512" role="img" aria-label="GenFocus, real-world comparison case 3"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="3">
+              <figcaption>DiffCamera</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge DiffCamera, comparison case 3"><canvas width="512" height="512" role="img" aria-label="DiffCamera, real-world comparison case 3"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="4">
+              <figcaption>RAV</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RAV, comparison case 3"><canvas width="512" height="512" role="img" aria-label="RAV, real-world comparison case 3"></canvas></button>
+            </figure>
+            <figure class="result-cell result-ours" data-column="5">
+              <figcaption>RefocusCraft</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RefocusCraft, comparison case 3"><canvas width="512" height="512" role="img" aria-label="RefocusCraft, real-world comparison case 3"></canvas></button>
+            </figure>
+          </div>
+          <div class="result-controls">
+            <button class="result-toggle" type="button" aria-label="Play comparison case 3">Play</button>
+            <input class="result-seek" type="range" min="0" max="24" value="0" step="1" aria-label="Video frame for comparison case 3">
+            <output class="result-frame" aria-label="Current frame">01 / 25</output>
+            <label class="result-speed-label">Playback <select class="result-speed" aria-label="Playback speed for comparison case 3"><option value="1">Original speed (1×)</option><option value="slow">Slow (8 fps)</option></select></label>
+          </div>
+          <p class="result-error" hidden>The comparison video could not be loaded.</p>
+        </article>
+        <article class="result-row" data-guid="cdf7a308-70d9-42d5-9b7b-42491aa69060" data-case="4" data-fps="23.976023976024" aria-label="Real-world comparison case 4">
+          <video class="result-video" data-src="media/fig6-case-4/all-methods.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="result-grid">
+            <figure class="result-cell" data-column="0">
+              <figcaption>Source</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge Source, comparison case 4"><canvas width="512" height="512" role="img" aria-label="Source, real-world comparison case 4"></canvas><span class="target-focus" style="left:34.37500%;top:45.70312%" aria-hidden="true"></span></button>
+            </figure>
+            <figure class="result-cell" data-column="1">
+              <figcaption>AnyBokeh</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge AnyBokeh, comparison case 4"><canvas width="512" height="512" role="img" aria-label="AnyBokeh, real-world comparison case 4"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="2">
+              <figcaption>GenFocus</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge GenFocus, comparison case 4"><canvas width="512" height="512" role="img" aria-label="GenFocus, real-world comparison case 4"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="3">
+              <figcaption>DiffCamera</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge DiffCamera, comparison case 4"><canvas width="512" height="512" role="img" aria-label="DiffCamera, real-world comparison case 4"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="4">
+              <figcaption>RAV</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RAV, comparison case 4"><canvas width="512" height="512" role="img" aria-label="RAV, real-world comparison case 4"></canvas></button>
+            </figure>
+            <figure class="result-cell result-ours" data-column="5">
+              <figcaption>RefocusCraft</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RefocusCraft, comparison case 4"><canvas width="512" height="512" role="img" aria-label="RefocusCraft, real-world comparison case 4"></canvas></button>
+            </figure>
+          </div>
+          <div class="result-controls">
+            <button class="result-toggle" type="button" aria-label="Play comparison case 4">Play</button>
+            <input class="result-seek" type="range" min="0" max="24" value="0" step="1" aria-label="Video frame for comparison case 4">
+            <output class="result-frame" aria-label="Current frame">01 / 25</output>
+            <label class="result-speed-label">Playback <select class="result-speed" aria-label="Playback speed for comparison case 4"><option value="1">Original speed (1×)</option><option value="slow">Slow (8 fps)</option></select></label>
+          </div>
+          <p class="result-error" hidden>The comparison video could not be loaded.</p>
+        </article>
+        <article class="result-row" data-guid="1eee3c4e-bd40-4377-8dc7-53a79e49ac66" data-case="5" data-fps="30.000000000000" aria-label="Real-world comparison case 5">
+          <video class="result-video" data-src="media/fig6-case-5/all-methods.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="result-grid">
+            <figure class="result-cell" data-column="0">
+              <figcaption>Source</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge Source, comparison case 5"><canvas width="512" height="512" role="img" aria-label="Source, real-world comparison case 5"></canvas><span class="target-focus" style="left:40.03906%;top:26.36719%" aria-hidden="true"></span></button>
+            </figure>
+            <figure class="result-cell" data-column="1">
+              <figcaption>AnyBokeh</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge AnyBokeh, comparison case 5"><canvas width="512" height="512" role="img" aria-label="AnyBokeh, real-world comparison case 5"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="2">
+              <figcaption>GenFocus</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge GenFocus, comparison case 5"><canvas width="512" height="512" role="img" aria-label="GenFocus, real-world comparison case 5"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="3">
+              <figcaption>DiffCamera</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge DiffCamera, comparison case 5"><canvas width="512" height="512" role="img" aria-label="DiffCamera, real-world comparison case 5"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="4">
+              <figcaption>RAV</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RAV, comparison case 5"><canvas width="512" height="512" role="img" aria-label="RAV, real-world comparison case 5"></canvas></button>
+            </figure>
+            <figure class="result-cell result-ours" data-column="5">
+              <figcaption>RefocusCraft</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RefocusCraft, comparison case 5"><canvas width="512" height="512" role="img" aria-label="RefocusCraft, real-world comparison case 5"></canvas></button>
+            </figure>
+          </div>
+          <div class="result-controls">
+            <button class="result-toggle" type="button" aria-label="Play comparison case 5">Play</button>
+            <input class="result-seek" type="range" min="0" max="24" value="0" step="1" aria-label="Video frame for comparison case 5">
+            <output class="result-frame" aria-label="Current frame">01 / 25</output>
+            <label class="result-speed-label">Playback <select class="result-speed" aria-label="Playback speed for comparison case 5"><option value="1">Original speed (1×)</option><option value="slow">Slow (8 fps)</option></select></label>
+          </div>
+          <p class="result-error" hidden>The comparison video could not be loaded.</p>
+        </article>
+        <article class="result-row" data-guid="34c0409c-44a5-4fa5-ac12-70d4a08bbd21" data-case="6" data-fps="23.976023976024" aria-label="Real-world comparison case 6">
+          <video class="result-video" data-src="media/fig6-case-6/all-methods.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="result-grid">
+            <figure class="result-cell" data-column="0">
+              <figcaption>Source</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge Source, comparison case 6"><canvas width="512" height="512" role="img" aria-label="Source, real-world comparison case 6"></canvas><span class="target-focus" style="left:33.98438%;top:25.19531%" aria-hidden="true"></span></button>
+            </figure>
+            <figure class="result-cell" data-column="1">
+              <figcaption>AnyBokeh</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge AnyBokeh, comparison case 6"><canvas width="512" height="512" role="img" aria-label="AnyBokeh, real-world comparison case 6"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="2">
+              <figcaption>GenFocus</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge GenFocus, comparison case 6"><canvas width="512" height="512" role="img" aria-label="GenFocus, real-world comparison case 6"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="3">
+              <figcaption>DiffCamera</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge DiffCamera, comparison case 6"><canvas width="512" height="512" role="img" aria-label="DiffCamera, real-world comparison case 6"></canvas></button>
+            </figure>
+            <figure class="result-cell" data-column="4">
+              <figcaption>RAV</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RAV, comparison case 6"><canvas width="512" height="512" role="img" aria-label="RAV, real-world comparison case 6"></canvas></button>
+            </figure>
+            <figure class="result-cell result-ours" data-column="5">
+              <figcaption>RefocusCraft</figcaption>
+              <button class="result-enlarge" type="button" aria-label="Enlarge RefocusCraft, comparison case 6"><canvas width="512" height="512" role="img" aria-label="RefocusCraft, real-world comparison case 6"></canvas></button>
+            </figure>
+          </div>
+          <div class="result-controls">
+            <button class="result-toggle" type="button" aria-label="Play comparison case 6">Play</button>
+            <input class="result-seek" type="range" min="0" max="24" value="0" step="1" aria-label="Video frame for comparison case 6">
+            <output class="result-frame" aria-label="Current frame">01 / 25</output>
+            <label class="result-speed-label">Playback <select class="result-speed" aria-label="Playback speed for comparison case 6"><option value="1">Original speed (1×)</option><option value="slow">Slow (8 fps)</option></select></label>
+          </div>
+          <p class="result-error" hidden>The comparison video could not be loaded.</p>
+        </article>
+      </div>
+    </section>
+    <section class="evidence-section" aria-labelledby="detail-evidence-title">
+      <h2 id="detail-evidence-title">Fine Details and Content Preservation</h2>
+      <p class="section-description">Compare lettering and fine patterns in matched, synchronized close-ups.</p>
+      <div class="segmented-buttons detail-selector" role="group" aria-label="Choose a detail example">
+        <button type="button" data-detail="bookshop" aria-pressed="true">Book-cover lettering</button>
+        <button type="button" data-detail="kitchen" aria-pressed="false">Fine grid pattern</button>
+      </div>
+      <div class="evidence-layout" data-evidence-player="details">
+        <figure class="evidence-context">
+          <figcaption>Source · crop location</figcaption>
+          <img class="evidence-context-image" src="media/evidence/details/bookshop-context.jpg" width="512" height="512" alt="Source reference frame with the compared region outlined">
+          <p class="context-note">Source reference frame. The outlined region is enlarged on the right.</p>
+        </figure>
+        <div class="evidence-comparison">
+          <p class="evidence-case-title">Book-cover lettering</p>
+          <video class="evidence-video" src="media/evidence/details/bookshop.mp4" muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+          <div class="evidence-scroll">
+            <div class="evidence-grid">
+              <figure class="evidence-cell result-cell">
+                <figcaption>Source</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge Source crop"><canvas width="128" height="128" role="img" aria-label="Source, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>AnyBokeh</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge AnyBokeh crop"><canvas width="128" height="128" role="img" aria-label="AnyBokeh, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>GenFocus</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge GenFocus crop"><canvas width="128" height="128" role="img" aria-label="GenFocus, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>DiffCamera</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge DiffCamera crop"><canvas width="128" height="128" role="img" aria-label="DiffCamera, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>RAV</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge RAV crop"><canvas width="128" height="128" role="img" aria-label="RAV, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>RefocusCraft</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge RefocusCraft crop"><canvas width="128" height="128" role="img" aria-label="RefocusCraft, matched video crop"></canvas></button>
+              </figure>
+            </div>
+          </div>
+          <div class="evidence-controls">
+            <button class="evidence-toggle" type="button">Play</button>
+            <input class="evidence-seek" type="range" min="0" max="24" step="1" value="0" aria-label="Video frame for details comparison">
+            <output class="evidence-frame" aria-label="Current frame">01 / 25</output>
+            <span class="slow-label">Slow · 5 fps</span>
+          </div>
+
+          <p class="evidence-note">Matched close-up of the printed lettering on the middle book cover. Click a crop to enlarge.</p>
+          <p class="evidence-error" hidden>The comparison video could not be loaded.</p>
+        </div>
+      </div>
+    </section>
+    <section class="evidence-section" aria-labelledby="temporal-evidence-title">
+      <h2 id="temporal-evidence-title">Temporal Consistency</h2>
+      <p class="section-description">Inspect facial appearance and background changes over the same 25-frame clip.</p>
+      <div class="evidence-layout" data-evidence-player="temporal">
+        <figure class="evidence-context">
+          <figcaption>Source · crop location</figcaption>
+          <img class="evidence-context-image" src="media/evidence/temporal/context.webp" width="512" height="512" alt="Source reference frame with the compared region outlined">
+          <p class="context-note">Source reference frame. Cyan box: face crop. Orange line: background scanline.</p>
+        </figure>
+        <div class="evidence-comparison">
+          <p class="evidence-case-title">Facial appearance over time</p>
+          <video class="evidence-video" src="media/evidence/temporal/face.mp4" muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+          <div class="evidence-scroll">
+            <div class="evidence-grid">
+              <figure class="evidence-cell result-cell">
+                <figcaption>Source</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge Source crop"><canvas width="120" height="120" role="img" aria-label="Source, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>AnyBokeh</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge AnyBokeh crop"><canvas width="120" height="120" role="img" aria-label="AnyBokeh, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>GenFocus</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge GenFocus crop"><canvas width="120" height="120" role="img" aria-label="GenFocus, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>DiffCamera</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge DiffCamera crop"><canvas width="120" height="120" role="img" aria-label="DiffCamera, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>RAV</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge RAV crop"><canvas width="120" height="120" role="img" aria-label="RAV, matched video crop"></canvas></button>
+              </figure>
+              <figure class="evidence-cell result-cell">
+                <figcaption>RefocusCraft</figcaption>
+                <button class="evidence-enlarge result-enlarge" type="button" aria-label="Enlarge RefocusCraft crop"><canvas width="120" height="120" role="img" aria-label="RefocusCraft, matched video crop"></canvas></button>
+              </figure>
+            </div>
+          </div>
+          <div class="evidence-controls">
+            <button class="evidence-toggle" type="button">Play</button>
+            <input class="evidence-seek" type="range" min="0" max="24" step="1" value="0" aria-label="Video frame for temporal comparison">
+            <output class="evidence-frame" aria-label="Current frame">01 / 25</output>
+            <span class="slow-label">Slow · 5 fps</span>
+          </div>
+          <div class="temporal-slices" aria-label="Background temporal slices, time from frame 1 at top to frame 25 at bottom">
+            <div class="slice-heading"><span>Background temporal slices</span><span>Time: top to bottom</span></div>
+            <div class="slice-grid">
+              <img src="media/evidence/temporal/slice-0.webp" width="123" height="25" alt="Source: background scanline across 25 frames">
+              <img src="media/evidence/temporal/slice-1.webp" width="123" height="25" alt="AnyBokeh: background scanline across 25 frames">
+              <img src="media/evidence/temporal/slice-2.webp" width="123" height="25" alt="GenFocus: background scanline across 25 frames">
+              <img src="media/evidence/temporal/slice-3.webp" width="123" height="25" alt="DiffCamera: background scanline across 25 frames">
+              <img src="media/evidence/temporal/slice-4.webp" width="123" height="25" alt="RAV: background scanline across 25 frames">
+              <img src="media/evidence/temporal/slice-5.webp" width="123" height="25" alt="RefocusCraft: background scanline across 25 frames">
+            </div>
+          </div>
+          <p class="evidence-note">The same fixed facial region across all 25 frames. Click a crop to enlarge.</p>
+          <p class="evidence-error" hidden>The comparison video could not be loaded.</p>
+        </div>
+      </div>
+    </section>
+    <section class="evidence-section focus-control-section" aria-labelledby="focus-control-title">
+      <h2 id="focus-control-title">Focus and Blur Strength Control</h2>
+      <p class="section-description">Change the focus plane and blur strength independently on the same video.</p>
+      <div class="focus-lab">
+        <div class="focus-lab-controls">
+          <div class="control-field"><span class="control-label">Focus plane</span>
+            <div class="segmented-buttons focus-selector" role="group" aria-label="Target focus plane">
+              <button type="button" data-focus="near" aria-pressed="true">Near</button>
+              <button type="button" data-focus="middle" aria-pressed="false">Middle</button>
+              <button type="button" data-focus="far" aria-pressed="false">Far</button>
+            </div>
+          </div>
+          <div class="control-field strength-field"><label class="control-label" for="blur-strength">Blur strength <output id="strength-label">Medium</output></label>
+            <input id="blur-strength" type="range" min="0" max="3" step="1" value="1" aria-valuetext="Medium blur strength">
+            <div class="strength-extents" aria-hidden="true"><span>Low</span><span>Strongest</span></div>
+          </div>
+        </div>
+        <div class="focus-lab-images">
+          <figure><figcaption>Source reference</figcaption><div class="focus-source-stage"><img src="media/evidence/control/source.webp" width="512" height="512" alt="Source reference frame for focus and blur-strength control"><span class="lab-focus-marker" aria-hidden="true"></span></div></figure>
+          <figure><figcaption>RefocusCraft <span id="focus-state">Near focus · Medium blur</span></figcaption><div class="focus-output-stage"><video id="focus-control-video" src="media/evidence/control/near-medium.mp4" poster="media/evidence/control/near-medium-poster.webp" width="512" height="512" muted loop playsinline controls preload="auto" aria-label="RefocusCraft with selected focus plane and blur strength"></video><span class="lab-focus-marker" aria-hidden="true"></span></div></figure>
+        </div>
+        <p class="lab-note">Yellow boxes mark the selected focus point. Slow playback.</p>
+      </div>
+    </section>
+    <section class="focus-motion-section" aria-labelledby="focus-motion-title">
+      <h2 id="focus-motion-title">Focus Transitions</h2>
+      <p class="focus-motion-description">Yellow boxes mark the current target focus. Generated videos are shown in slow motion.</p>
+      <div class="focus-motion-grid">
+        <figure class="focus-motion-card">
+          <figcaption>Forest cutting board</figcaption>
+          <video src="media/focus-transitions/forest.mp4" poster="media/focus-transitions/forest-poster.jpg" width="512" height="512" controls autoplay muted loop playsinline preload="auto" aria-label="Forest cutting board: generated video with changing target focus, slow playback"></video>
+        </figure>
+        <figure class="focus-motion-card">
+          <figcaption>Dining table</figcaption>
+          <video src="media/focus-transitions/dining-table.mp4" poster="media/focus-transitions/dining-table-poster.jpg" width="512" height="512" controls autoplay muted loop playsinline preload="auto" aria-label="Dining table: generated video with changing target focus, slow playback"></video>
+        </figure>
+        <figure class="focus-motion-card">
+          <figcaption>Choir</figcaption>
+          <video src="media/focus-transitions/choir.mp4" poster="media/focus-transitions/choir-poster.jpg" width="512" height="512" controls autoplay muted loop playsinline preload="auto" aria-label="Choir: generated video with changing target focus, slow playback"></video>
+        </figure>
+      </div>
+    </section>
+    <section class="evidence-section efficiency-section" aria-labelledby="efficiency-title">
+      <h2 id="efficiency-title">Inference Efficiency</h2>
+      <p class="section-description">NVIDIA A800 · 25 frames · 512 × 512 · Precomputed conditions</p>
+      <div class="efficiency-layout">
+        <div class="efficiency-metric"><span class="metric-method">RefocusCraft</span><strong>2.36<span> s</span></strong><span class="metric-unit">per 25-frame clip</span></div>
+        <figure class="latency-chart" aria-label="Mean conditional-ready refocusing time in seconds; lower is better">
+          <figcaption>Mean processing time <span>Lower is better</span></figcaption>
+            <div class="latency-row latency-ours"><span class="latency-method">RefocusCraft</span><span class="latency-track" aria-hidden="true"><span class="latency-bar" style="width:0.395284%"></span></span><span class="latency-value">2.36 s</span></div>
+            <div class="latency-row"><span class="latency-method">RAV</span><span class="latency-track" aria-hidden="true"><span class="latency-bar" style="width:13.717775%"></span></span><span class="latency-value">81.98 s</span></div>
+            <div class="latency-row"><span class="latency-method">AnyBokeh</span><span class="latency-track" aria-hidden="true"><span class="latency-bar" style="width:39.972743%"></span></span><span class="latency-value">238.90 s</span></div>
+            <div class="latency-row"><span class="latency-method">DiffCamera</span><span class="latency-track" aria-hidden="true"><span class="latency-bar" style="width:61.034829%"></span></span><span class="latency-value">364.78 s</span></div>
+            <div class="latency-row"><span class="latency-method">GenFocus</span><span class="latency-track" aria-hidden="true"><span class="latency-bar" style="width:100.000000%"></span></span><span class="latency-value">597.65 s</span></div>
+        </figure>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><p>RefocusCraft · Unified Video Refocusing via CoC-Guided State Transitions</p></footer>
+  <dialog id="method-dialog" aria-label="Method overview enlarged">
+    <button class="close-dialog" type="button" autofocus>Close</button>
+    <img src="figures/method_overview.webp" width="3200" height="1543" alt="Enlarged RefocusCraft method overview">
+  </dialog>
+</body>
+</html>
